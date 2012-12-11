@@ -1,29 +1,29 @@
 %define upstream_name    Net-Trac
 %define upstream_version 0.16
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 1
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	2
 
-Summary:    Simple client library for a remote Trac instance
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/Net/%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	Simple client library for a remote Trac instance
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/Net/%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl(Any::Moose)
-BuildRequires: perl(DateTime)
-BuildRequires: perl(ExtUtils::MakeMaker)
-BuildRequires: perl(HTTP::Date)
-BuildRequires: perl(LWP::Simple)
-BuildRequires: perl(Lingua::EN::Inflect)
-BuildRequires: perl(Params::Validate)
-BuildRequires: perl(Text::CSV)
-BuildRequires: perl(URI)
-BuildRequires: perl(URI::Escape)
-BuildRequires: perl(WWW::Mechanize)
-BuildArch: noarch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:	perl-devel
+BuildRequires:	perl(Any::Moose)
+BuildRequires:	perl(DateTime)
+BuildRequires:	perl(ExtUtils::MakeMaker)
+BuildRequires:	perl(HTTP::Date)
+BuildRequires:	perl(LWP::Simple)
+BuildRequires:	perl(Lingua::EN::Inflect)
+BuildRequires:	perl(Params::Validate)
+BuildRequires:	perl(Text::CSV)
+BuildRequires:	perl(URI)
+BuildRequires:	perl(URI::Escape)
+BuildRequires:	perl(WWW::Mechanize)
+BuildArch:	noarch
 
 %description
 Net::Trac is simple client library for a remote Trac instance. Because Trac
@@ -41,27 +41,33 @@ for Trac's tickets is provided. Patches would be gratefully appreciated.
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
-
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
 # (misc, 30/04/2010) 
 # tests do not work
 # https://rt.cpan.org/Ticket/Display.html?id=57063 
-#%make test
+#make test
 
 %install
-rm -rf %buildroot
 %makeinstall_std
 
-%clean
-rm -rf %buildroot
-
 %files
-%defattr(-,root,root)
 %doc META.yml Changes
 %{_mandir}/man3/*
-%perl_vendorlib/Net
+%{perl_vendorlib}/Net
 
 
+%changelog
+* Wed Apr 06 2011 Sandro Cazzaniga <kharec@mandriva.org> 0.160.0-1mdv2011.0
++ Revision: 651042
+- new version 0.16
+
+* Fri Apr 30 2010 Michael Scherer <misc@mandriva.org> 0.150.0-1mdv2011.0
++ Revision: 541156
+- import perl-Net-Trac
+
+
+* Fri Apr 30 2010 cpan2dist 0.15-1mdv
+- initial mdv release, generated with cpan2dist
