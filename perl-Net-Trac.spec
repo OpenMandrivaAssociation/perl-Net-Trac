@@ -1,15 +1,13 @@
 %define upstream_name    Net-Trac
-%define upstream_version 0.16
-
 Name:		perl-%{upstream_name}
-Version:	%{upstream_version}
-Release:	5
+Version:	0.16
+Release:	6
 
 Summary:	Simple client library for a remote Trac instance
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		https://metacpan.org/dist/Net-Trac
-Source0:	https://cpan.metacpan.org/authors/id/S/SP/SPANG/Net-Trac-%{upstream_version}.tar.gz
+Source0:	https://cpan.metacpan.org/authors/id/S/SP/SPANG/Net-Trac-%{version}.tar.gz
 
 BuildRequires:	make
 BuildRequires:	perl-devel
@@ -39,7 +37,7 @@ featureset reflects this. Right now, only basic read/write functionality
 for Trac's tickets is provided. Patches would be gratefully appreciated.
 
 %prep
-%setup -q -n %{upstream_name}-%{upstream_version}
+%setup -q -n %{upstream_name}-%{version}
 
 %build
 perl Makefile.PL INSTALLDIRS=vendor
